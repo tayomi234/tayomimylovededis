@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О бренде — Керама Мараци | Премиальная керамика и керамогранит</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Чёрно-белая гамма с нежно-розовым акцентом */
+        :root {
+            --black: #000000;
+            --dark-gray: #1a1a1a;
+            --gray: #333333;
+            --light-gray: #555555;
+            --border-light: #e0e0e0;
+            --soft-pink: #f5c6d0;
+            --soft-pink-dark: #e8a0b0;
+            --white: #ffffff;
+            --bg-light: #faf8f4;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, 'Segoe UI', 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+            background-color: #ffffff;
+            color: var(--dark-gray);
+        }
+        
+        header {
+            background-color: var(--black);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #222;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 16px 28px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            color: var(--white);
+            font-family: 'Playfair Display', serif;
+            text-decoration: none;
+            background: none;
+            -webkit-background-clip: unset;
+            background-clip: unset;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 28px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        nav ul li a:hover {
+            color: #cccccc;
+        }
+        
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--soft-pink);
+            padding: 6px 14px;
+            border-radius: 40px;
+            transition: 0.2s;
+            border: 1px solid var(--soft-pink-dark);
+        }
+        
+        .cart-icon:hover {
+            background-color: var(--soft-pink-dark);
+            transform: translateY(-1px);
+        }
+        
+        .cart-count {
+            background-color: #5e2e3a;
+            color: var(--soft-pink);
+            border-radius: 30px;
+            width: 22px;
+            height: 22px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 11px;
+            font-weight: 700;
+        }
+        
+        main {
+            max-width: 1280px;
+            margin: 48px auto;
+            padding: 0 28px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 16px;
+            letter-spacing: -0.3px;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin: 48px 0 20px 0;
+            color: var(--black);
+            border-left: 4px solid var(--gray);
+            padding-left: 18px;
+        }
+        
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin: 24px 0 12px 0;
+            color: var(--black);
+        }
+        
+        .about-section {
+            margin-bottom: 56px;
+        }
+        
+        .about-section p {
+            font-size: 1.05rem;
+            color: var(--dark-gray);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .hero-quote {
+            background: #f5f5f5;
+            padding: 40px 48px;
+            border-radius: 48px;
+            margin: 32px 0 48px 0;
+            border-left: 6px solid var(--gray);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .hero-quote p {
+            font-size: 1.3rem;
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
+            color: var(--black);
+            margin: 0;
+        }
+        
+        .hero-quote small {
+            display: block;
+            margin-top: 16px;
+            font-size: 0.9rem;
+            color: var(--light-gray);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 28px;
+            margin: 48px 0;
+        }
+        
+        .stat-card {
+            background: var(--white);
+            padding: 32px 20px;
+            border-radius: 28px;
+            border: 1px solid var(--border-light);
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--light-gray);
+        }
+        
+        .team {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            margin-top: 32px;
+            justify-content: center;
+        }
+        
+        .team-member {
+            flex: 1 1 220px;
+            text-align: center;
+            background: var(--white);
+            padding: 28px 20px;
+            border-radius: 32px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-light);
+        }
+        
+        .team-member:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .team-member img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 18px;
+            border: 3px solid #cccccc;
+        }
+        
+        .team-member h3 {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            color: var(--black);
+        }
+        
+        .team-member .position {
+            font-size: 0.85rem;
+            color: var(--gray);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .team-member .bio {
+            font-size: 0.75rem;
+            color: var(--light-gray);
+        }
+        
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+        }
+        
+        .advantage-item {
+            background: var(--white);
+            padding: 24px;
+            border-radius: 24px;
+            border: 1px solid var(--border-light);
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        
+        .advantage-icon {
+            font-size: 2rem;
+        }
+        
+        .advantage-text h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--black);
+        }
+        
+        .advantage-text p {
+            font-size: 0.9rem;
+            margin: 0;
+            line-height: 1.5;
+            color: var(--light-gray);
+        }
+        
+        .tech-badge {
+            display: inline-block;
+            background: var(--black);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .partner-logos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+            padding: 20px;
+            background: var(--white);
+            border-radius: 32px;
+            border: 1px solid var(--border-light);
+        }
+        
+        .partner-item {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--black);
+            padding: 8px 20px;
+            background: #f5f5f5;
+            border-radius: 40px;
+        }
+        
+        footer {
+            background-color: var(--black);
+            color: var(--white);
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid #222;
+            margin-top: 60px;
+        }
+        
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            font-size: 0.85rem;
+        }
+        
+        .footer-container p {
+            color: var(--white);
+        }
+        
+        .footer-container p:first-child {
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+        
+        @media (max-width: 760px) {
+            .header-container {
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .hero-quote {
+                padding: 24px;
+            }
+            .hero-quote p {
+                font-size: 1rem;
+            }
+            .team {
+                gap: 20px;
+            }
+            .advantage-item {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">Керама Мараци</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="catalog.html">Коллекции</a></li>
+                    <li><a href="acc.html">Аккаунт</a></li>
+                </ul>
+            </nav>
+            <div class="cart-icon" id="cartIcon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5e2e3a" stroke-width="1.8">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <h1>Искусство керамики</h1>
+        
+        <div class="hero-quote">
+            <p>«Керамика — это диалог между природой и человеком. Мы создаём материалы, которые вдохновляют и служат веками.»</p>
+            <small>— Основатель бренда Керама Мараци</small>
+        </div>
+        
+        <!-- История бренда -->
+        <div class="about-section">
+            <h2>🇮🇹 История бренда</h2>
+            <p><strong>Керама Мараци</strong> — российский премиальный бренд, основанный в 2012 году при участии итальянских мастеров керамического дела. Название бренда сочетает в себе два понятия: «керама» (древнегреческое слово, означающее глину, обожжённую в огне) и «мараци» — в честь семьи итальянских ремесленников, передававших секреты глазури из поколения в поколение.</p>
+            <p>За более чем 12 лет работы мы превратились из небольшой мастерской в одного из лидеров российского рынка премиальной керамики. Наше производство сочетает вековые традиции итальянской глазури и передовые технологии цифровой печати. Сегодня Керама Мараци — это узнаваемый знак качества, который выбирают ведущие архитекторы, дизайнеры интерьеров и владельцы частных резиденций.</p>
+            <p>Наш главный шоурум в Москве представляет более 250 уникальных коллекций: от рустикальной плитки «Прованс» до крупноформатных слэбов 160×320 см, которые имитируют натуральный мрамор, травертин, оникс и редкие породы дерева. Каждая партия нашей продукции проходит строжайший контроль на цветовой постоянство, геометрию и износостойкость, что подтверждено сертификатами европейских лабораторий.</p>
+        </div>
+        
+        <!-- Статистика -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">12+ лет</div>
+                <div class="stat-label">лидерства на рынке</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">250+</div>
+                <div class="stat-label">эксклюзивных коллекций</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">25 000+</div>
+                <div class="stat-label">реализованных проектов</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">15 лет</div>
+                <div class="stat-label">гарантии на изделия</div>
+            </div>
+        </div>
+        
+        <!-- Миссия и ценности -->
+        <div class="about-section">
+            <h2>🎯 Наша миссия</h2>
+            <p>Мы стремимся вдохновлять архитекторов и дизайнеров, предлагая идеальные текстуры камня, бетона, мрамора и дерева. Наша цель — сделать керамику не просто отделочным материалом, а элементом искусства, который преображает пространство и создаёт атмосферу уюта и роскоши.</p>
+            <p>Каждая плитка Керама Мараци — это история вкуса, уважения к традициям и заботы об экологии. Мы верим, что красивые и долговечные материалы способны изменить качество жизни, поэтому инвестируем в разработку инновационных покрытий с антибактериальными свойствами, лёгким уходом и повышенной износостойкостью.</p>
+        </div>
+        
+        <!-- Технологии и преимущества -->
+        <div class="about-section">
+            <h2>⚙️ Технологии превосходства</h2>
+            <p>На заводе Керама Мараци установлены итальянские линии по производству керамогранита от компаний <strong>SACMI</strong> и <strong>System Ceramics</strong>. Мы используем технологию цифровой струйной печати <strong>HD-Digital</strong>, которая позволяет передавать мельчайшие детали природных материалов с невероятной точностью.</p>
+            
+            <div class="advantages-grid">
+                <div class="advantage-item">
+                    <div class="advantage-icon">🔬</div>
+                    <div class="advantage-text">
+                        <h4>Нано-защита</h4>
+                        <p>Специальное покрытие отталкивает грязь, воду и масла, упрощая уход за поверхностью.</p>
+                    </div>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon"></div>
+                    <div class="advantage-text">
+                        <h4>Двойной обжиг</h4>
+                        <p>Обеспечивает исключительную прочность и морозостойкость, подходит для наружного применения.</p>
+                    </div>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon"></div>
+                    <div class="advantage-text">
+                        <h4>Ректификация</h4>
+                        <p>Идеальная геометрия плитки позволяет укладывать её с минимальными швами 1-2 мм.</p>
+                    </div>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">♻️</div>
+                    <div class="advantage-text">
+                        <h4>Эко-производство</h4>
+                        <p>Замкнутый цикл воды, переработка брака и использование очистных фильтров нового поколения.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin: 24px 0;">
+                <span class="tech-badge">Класс истирания PEI 5</span>
+                <span class="tech-badge">Морозостойкость D1</span>
+                <span class="tech-badge">Водопоглощение &lt;0.1%</span>
+                <span class="tech-badge">Антистатическое покрытие</span>
+                <span class="tech-badge">Сертификат A+ (EcoLabel)</span>
+            </div>
+        </div>
+        
+        <!-- Команда -->
+        <div class="about-section">
+            <h2>👥 Команда профессионалов</h2>
+            <p>Наш коллектив — это эксперты в области керамики, дизайна, технологий и клиентского сервиса. Мы всегда рядом, чтобы помочь выбрать идеальное покрытие для ванной, гостиной, фасада или коммерческого пространства.</p>
+            
+            <div class="team">
+                <div class="team-member">
+                    <img src="img/2025-06-08 23.00.16.jpg" alt="Владимир Артемьев">
+                    <h3>Владимир</h3>
+                    <div class="position">Арт-директор, технолог</div>
+                    <div class="bio">Более 12 лет в керамической индустрии. Разработал более 50 авторских коллекций.</div>
+                </div>
+                <div class="team-member">
+                    <img src="img/кукукукукууку.png" alt="Татьяна Григорьева">
+                    <h3>Татьяна</h3>
+                    <div class="position">Главный дизайнер</div>
+                    <div class="bio">Эксперт по цвету и текстурам. Лауреат премии «Дизайн года 2023».</div>
+                </div>
+                <div class="team-member">
+                    <img src="img/2025-06-08 23.03.35.jpg" alt="Эдуард Маркелов">
+                    <h3>Эдуард</h3>
+                    <div class="position">Руководитель маркетинга</div>
+                    <div class="bio">Стратегия премиальных брендов, развитие B2B и B2C направлений.</div>
+                </div>
+                <div class="team-member">
+                    <img src="img/2025-06-08 23.03.56.jpg" alt="Иван Соколов">
+                    <h3>Иван</h3>
+                    <div class="position">Руководитель поддержки</div>
+                    <div class="bio">Забота о каждом клиенте, контроль качества сервиса и логистики.</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Экологичность -->
+        <div class="about-section">
+            <h2>🌿 Экологичность и устойчивое развитие</h2>
+            <p>В основе нашего производства — замкнутый цикл воды, позволяющий экономить до 95% водных ресурсов. Все бракованные изделия и обрезки отправляются на переработку и используются в качестве вторичного сырья. Мы участвуем в программе «Ноль отходов», а все упаковочные материалы пригодны для вторичной переработки.</p>
+            <p>Керамогранитные плиты Керама Мараци имеют маркировку <strong>A+</strong> по европейским экологическим стандартам, что гарантирует полное отсутствие вредных выбросов даже при нагревании. Наше производство сертифицировано по стандартам ISO 14001 (экологический менеджмент) и ISO 9001 (менеджмент качества).</p>
+        </div>
+        
+        <!-- Награды и партнёры -->
+        <div class="about-section">
+            <h2>Признание и партнёры</h2>
+            <p>Керама Мараци неоднократно становилась лауреатом профессиональных премий: «Лучший керамогранит года» (2021, 2023), «Выбор дизайнеров» (2022), «Инновация года» за коллекцию «3D Волна» (2024). Наша продукция используется в проектах известных архитектурных бюро и девелоперских компаний.</p>
+            
+            <div class="partner-logos">
+                <div class="partner-item">ARCH GROUP</div>
+                <div class="partner-item">Интерьер-Арсенал</div>
+                <div class="partner-item">Deloit Design</div>
+                <div class="partner-item">Премиум Строй</div>
+                <div class="partner-item">ArtSpace Studio</div>
+            </div>
+            
+            <p>Мы гордимся сотрудничеством с ведущими дизайнерами России и СНГ, а также регулярно проводим обучающие семинары и воркшопы по современным методам укладки керамики и керамогранита.</p>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="footer-container">
+            <p>© 2025 Керама Мараци — итальянский стиль и безупречное качество.</p>
+            <p style="margin-top: 12px; font-size: 0.75rem;">Плитка, керамогранит, мрамор, мозаика, 3D-панели — для интерьеров премиум-класса</p>
+            <p style="margin-top: 16px; font-size: 0.7rem;">Москва, ул. Тверская 12, стр. 3 | Ежедневно с 10:00 до 21:00</p>
+        </div>
+    </footer>
+
+    <script>
+        // Корзина — синхронизация с каталогом
+        let cart = JSON.parse(localStorage.getItem('kerama_cart')) || [];
+        const cartCountSpan = document.getElementById('cartCount');
+        
+        function updateCartCount() {
+            const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+            if (cartCountSpan) cartCountSpan.innerText = total;
+        }
+        
+        updateCartCount();
+        
+        const cartIcon = document.getElementById('cartIcon');
+        if (cartIcon) {
+            cartIcon.addEventListener('click', () => {
+                window.location.href = 'catalog.html';
+            });
+        }
+    </script>
+</body>
+</html>

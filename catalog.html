@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Керама Мараци — Каталог керамики и плитки</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, 'Segoe UI', Roboto, sans-serif;
+      background-color: #ffffff;
+      color: #1a1a1a;
+    }
+
+    /* Чёрно-белая гамма с нежно-розовыми акцентами */
+    :root {
+      --black: #000000;
+      --dark-gray: #1a1a1a;
+      --gray: #333333;
+      --light-gray: #555555;
+      --border-light: #e0e0e0;
+      --soft-pink: #f5c6d0;
+      --soft-pink-dark: #e8a0b0;
+      --white: #ffffff;
+      --hover-bg: #2a2a2a;
+    }
+
+    header {
+      background-color: var(--black);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      padding: 12px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #222;
+    }
+
+    .header-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      color: var(--white);
+      font-family: 'Playfair Display', serif;
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      gap: 32px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--white);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: 0.2s;
+    }
+
+    nav a:hover {
+      color: #cccccc;
+    }
+
+    .cart-icon {
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background-color: var(--soft-pink);
+      padding: 8px 18px;
+      border-radius: 40px;
+      transition: 0.2s;
+      font-weight: 500;
+      color: #5e2e3a;
+      border: 1px solid var(--soft-pink-dark);
+    }
+
+    .cart-icon:hover {
+      background-color: var(--soft-pink-dark);
+      transform: translateY(-1px);
+    }
+
+    .cart-count {
+      background-color: #5e2e3a;
+      border-radius: 30px;
+      padding: 2px 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--soft-pink);
+      margin-left: 4px;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 40px 0 10px;
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--dark-gray);
+      font-family: 'Playfair Display', serif;
+      letter-spacing: -0.3px;
+    }
+
+    .subhead {
+      text-align: center;
+      color: var(--light-gray);
+      margin-bottom: 30px;
+      font-size: 1rem;
+    }
+
+    .categories {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      max-width: 1280px;
+      margin: 0 auto 30px;
+      padding: 0 28px;
+    }
+
+    .category-btn {
+      background: var(--white);
+      border: 1px solid var(--border-light);
+      padding: 8px 20px;
+      border-radius: 40px;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--dark-gray);
+      transition: 0.2s;
+    }
+
+    .category-btn:hover,
+    .category-btn.active {
+      background: var(--black);
+      color: white;
+      border-color: var(--black);
+    }
+
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 32px;
+      padding: 20px 28px 60px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .product {
+      background-color: var(--white);
+      border-radius: 28px;
+      box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.08);
+      width: 320px;
+      padding: 20px 20px 24px;
+      transition: all 0.25s ease;
+      border: 1px solid var(--border-light);
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-carousel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      margin-bottom: 18px;
+      background-color: #f0f0f0;
+    }
+
+    .product-carousel-track {
+      display: flex;
+      transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+
+    .product-carousel-slide {
+      min-width: 100%;
+    }
+
+    .product-carousel-slide img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+      /* grayscale удалён — цветные картинки */
+    }
+
+    .product-carousel-buttons {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      padding: 0 8px;
+    }
+
+    .product-carousel-buttons button {
+      background-color: rgba(0, 0, 0, 0.6);
+      border: none;
+      color: white;
+      padding: 6px 12px;
+      font-size: 18px;
+      border-radius: 40px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .product-carousel-buttons button:hover {
+      background-color: var(--black);
+      transform: scale(1.05);
+    }
+
+    .product h3 {
+      font-size: 1.2rem;
+      margin: 12px 0 8px;
+      font-weight: 600;
+      color: var(--dark-gray);
+    }
+
+    .product-category {
+      font-size: 0.7rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .product p {
+      color: var(--light-gray);
+      font-size: 0.85rem;
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+
+    .price {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--dark-gray);
+      margin: 12px 0;
+    }
+
+    .add-to-cart {
+      background-color: var(--black);
+      color: white;
+      border: none;
+      padding: 12px 0;
+      width: 100%;
+      border-radius: 60px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: 0.2s;
+      margin-top: 8px;
+    }
+
+    .add-to-cart:hover {
+      background-color: var(--gray);
+      transform: translateY(-1px);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(3px);
+    }
+
+    .modal-content {
+      background-color: var(--white);
+      margin: 5% auto;
+      padding: 28px;
+      border-radius: 32px;
+      width: 90%;
+      max-width: 800px;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .close:hover {
+      color: var(--black);
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border-light);
+      gap: 16px;
+    }
+
+    .cart-item img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 16px;
+      /* grayscale удалён — цветные миниатюры */
+    }
+
+    .cart-item-info {
+      flex-grow: 1;
+    }
+
+    .cart-item-info h4 {
+      margin-bottom: 6px;
+      font-size: 1rem;
+    }
+
+    .cart-item-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cart-item-controls button {
+      background-color: var(--black);
+      color: white;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.2s;
+    }
+
+    .cart-item-controls button:hover {
+      background-color: var(--gray);
+    }
+
+    .cart-item-controls span {
+      min-width: 28px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .cart-total {
+      text-align: right;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 2px solid var(--border-light);
+      color: var(--black);
+    }
+
+    .checkout-btn {
+      background-color: var(--black);
+      color: white;
+      border: none;
+      padding: 12px 32px;
+      margin-top: 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      float: right;
+    }
+
+    .checkout-btn:hover {
+      background-color: var(--gray);
+    }
+
+    .empty-cart {
+      text-align: center;
+      padding: 50px;
+      color: var(--light-gray);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      background-color: var(--black);
+      color: var(--white);
+      margin-top: 40px;
+      font-size: 0.8rem;
+      border-top: 1px solid #222;
+    }
+
+    footer div {
+      color: var(--white);
+    }
+
+    @media (max-width: 700px) {
+      .header-container {
+        flex-direction: column;
+      }
+      .products {
+        padding: 16px;
+      }
+      .product {
+        width: 100%;
+        max-width: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <div class="logo">Керама Мараци</div>
+      <nav>
+        <a href="index.html">Главная</a>
+        <a href="onas.html">О бренде</a>
+        <a href="acc.html">Аккаунт</a>
+      </nav>
+      <div class="cart-icon" id="cartIcon">
+        🛒 Корзина <span class="cart-count" id="cartCount">0</span>
+      </div>
+    </div>
+  </header>
+
+  <h1>Каталог премиум-керамики</h1>
+  <div class="subhead">Керамогранит, мраморная плитка, мозаика и декор для вашего интерьера</div>
+
+  <div class="categories" id="categories">
+    <button class="category-btn active" data-category="all">Все</button>
+    <button class="category-btn" data-category="keramogranit">Керамогранит</button>
+    <button class="category-btn" data-category="plitka">Плитка</button>
+    <button class="category-btn" data-category="mozaika">Мозаика</button>
+    <button class="category-btn" data-category="dekor">Декор</button>
+  </div>
+
+  <div class="products" id="productsContainer"></div>
+
+  <footer>
+    <div>© 2026 Керама Мараци — элитная керамика и мрамор для интерьеров.</div>
+    <div style="margin-top: 8px;">премиальная плитка, керамогранит и дизайн-решения</div>
+  </footer>
+
+  <div id="cartModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>🛍️ Ваша корзина</h2>
+      <div id="cartItems"></div>
+      <div class="cart-total">
+        Итого: <span id="cartTotal">0</span> ₽
+      </div>
+      <button class="checkout-btn">Оформить заказ</button>
+    </div>
+  </div>
+
+  <script>
+    // ----- ТОВАРЫ - ПО 5+ В КАЖДОЙ КАТЕГОРИИ -----
+    const productsData = [
+      // КЕРАМОГРАНИТ (10 шт)
+      { id: "1", name: "Керамогранит 'Calacatta Gold'", category: "keramogranit", price: 4590, unit: "м²", desc: "Изысканная имитация итальянского мрамора, полированная поверхность, 60x120 см.", images: ["img/golden 1.png", "img/golden2.png", "img/golden 3.png"] },
+      { id: "2", name: "Керамогранит 'Артемида'", category: "keramogranit", price: 7890, unit: "м²", desc: "Ректифицированный, 120x240 см, текстура травертина. Премиум-класс.", images: ["img/artem1.png", "img/artem2.png", "img/artem3.png"] },
+      { id: "5", name: "Керамогранит 'Statuario'", category: "keramogranit", price: 12900, unit: "м²", desc: "Элитный керамогранит под белый каррарский мрамор, 120x240 см.", images: ["img/stat1.png", "img/stat2.png", "img/stat3.png"] },
+      { id: "13", name: "Керамогранит 'Оникс'", category: "keramogranit", price: 15900, unit: "м²", desc: "Подсветка в структуре, имитация драгоценного камня.", images: ["img/onix1.png", "img/onix2.png", "img/onix3.png"] },
+      { id: "17", name: "Керамогранит 'Сланец'", category: "keramogranit", price: 6850, unit: "м²", desc: "Фактурная поверхность под натуральный сланец.", images: ["img/slan1.png", "img/slan2.png", "img/slan3.png"] },
+      { id: "k6", name: "Керамогранит 'Bianco Carrara'", category: "keramogranit", price: 11200, unit: "м²", desc: "Белый мрамор с серыми прожилками, 60x120, полировка.", images: ["img/bianco1.png", "img/bianco2.png", "img/bianco3.png"] },
+      { id: "k7", name: "Керамогранит 'Nero Marquina'", category: "keramogranit", price: 14800, unit: "м²", desc: "Черный мрамор с белыми прожилками, глянец.", images: ["img/nero1.png", "img/nero2.png", "img/nero3.png"] },
+      { id: "k8", name: "Керамогранит 'Бетон Индастриал'", category: "keramogranit", price: 5250, unit: "м²", desc: "Лофт стиль, матовая поверхность, 60x60 см.", images: ["img/ind1.png", "img/ind2.png", "img/ind3.png"] },
+      { id: "k9", name: "Керамогранит 'Wood Oak'", category: "keramogranit", price: 6450, unit: "м²", desc: "Под дуб, 20x180 см, для пола и стен.", images: ["img/wood1.png", "img/wood2.png", "img/wood3.png"] },
+            // ПЛИТКА (10 шт)
+      { id: "4", name: "Плитка 'Прованс'", category: "plitka", price: 2450, unit: "м²", desc: "Ретро-плитка с рустикальным узором, для кухни и ванной. 20x20 см.", images: ["img/provance1.png", "img/provance2.png", "img/provance3.png"] },
+      { id: "7", name: "Плитка 'Мраморный каприз'", category: "plitka", price: 5390, unit: "м²", desc: "Глянец, натуральный рисунок, для элитных гостиных и холлов.", images: ["img/kaprise1.png", "img/kaprise2.png", "img/kaprise3.png"] },
+      { id: "12", name: "Плитка 'Плитка Олимпиада'", category: "plitka", price: 4150, unit: "м²", desc: "Плитка Олимпиада Дизайнерская керамическая плитка для ванной с авторским принтом на глубоком синем фоне, 60x60 см.", images: ["img/beton1.png", "img/beton2.png", "img/beton3.png"] },
+      { id: "16", name: "Плитка 'Гжель'", category: "plitka", price: 5200, unit: "м²", desc: "Модная плитка с принтом, 45x45 см.", images: ["img/ter1.png", "img/ter2.png", "img/ter3.png"] },
+      { id: "p5", name: "Плитка 'Дуб натуральный'", category: "plitka", price: 3290, unit: "м²", desc: "Керамическая доска под дерево, матовая, износостойкая. 20x120 см.", images: ["img/dub1.png", "img/dub2.png", "img/dub 3.png"] },
+      { id: "p6", name: "Плитка 'Метлахская звезда'", category: "plitka", price: 3850, unit: "м²", desc: "Шестигранная плитка, винтажный стиль, 15x15 см.", images: ["img/zvezda1.png", "img/zvezda2.png", "img/zvezda3.png"] },
+      { id: "p7", name: "Плитка 'Венецианская мозаика'", category: "plitka", price: 7200, unit: "м²", desc: "Роскошная плитка в венецианском стиле, 60x60 см.", images: ["img/ven1.png", "img/ven2.png", "img/ven3.png"] },
+      { id: "p8", name: "Плитка 'Плитка Рыбья Чешуя'", category: "plitka", price: 4980, unit: "м²", desc: "Плитка Рыбья Чешуя, 15x90 см.", images: ["img/shev1.png", "img/shev2.png", "img/shev3.png"] },
+      { id: "p9", name: "Плитка 'Плитка Капли '", category: "plitka", price: 2750, unit: "м²", desc: "Плитка Капли , 7x28 см.", images: ["img/kirp1.png", "img/kirp2.png", "img/kirp3.png"] },
+      { id: "p10", name: "Плитка 'Кристалл'", category: "plitka", price: 6850, unit: "м²", desc: "С эффектом кристаллов, глянец, 30x60 см.", images: ["img/krist1.png", "img/krist2.png", "img/krist3.png"] },
+      
+      // МОЗАИКА (9 шт)
+      { id: "3", name: "Мозаика 'Перламутр'", category: "mozaika", price: 6750, unit: "упак.", desc: "Стеклянная мозаика с переливами, для фартуков и акцентных зон. 30x30 см.", images: ["img/steklo1.png", "img/steklo2.png", "img/steklo3.png"] },
+      { id: "11", name: "Мозаика 'Золотая чешуя'", category: "mozaika", price: 8900, unit: "упак.", desc: "Роскошная мозаика с золотистая для ванной и гостиной.", images: ["img/zolot1.png", "img/zolot2.png", "img/zolot3.png"] },
+      { id: "14", name: "Мозаика 'Морская волна'", category: "mozaika", price: 7200, unit: "упак.", desc: "Повторяет форму волны, 30x30 см.", images: ["img/more1.png", "img/more2.png", "img/more3.png"] },
+      { id: "18", name: "Мозаика 'Серебро'", category: "mozaika", price: 7950, unit: "упак.", desc: "Серебристая мозаика .", images: ["img/silver1.png", "img/silver2.png", "img/silver3.png"] },
+      { id: "m5", name: "Мозаика 'Каприз'", category: "mozaika", price: 5600, unit: "упак.", desc: "Смесь мрамора и стекла, 30x30 см.", images: ["img/mkap1.png", "img/mkap2.png", "img/mkap3.png"] },
+      { id: "m6", name: "Мозаика 'Панцирь черепахи'", category: "mozaika", price: 12400, unit: "упак.", desc: "Эксклюзивная мозаика ручной работы.", images: ["img/tort1.png", "img/tort2.png", "img/tort3.png"] },
+      { id: "m7", name: "Мозаика 'Галька'", category: "mozaika", price: 4300, unit: "упак.", desc: "Имитация речной гальки, для душевых.", images: ["img/gal1.png", "img/gal2.png", "img/gal3.png"] },
+      { id: "m8", name: "Мозаика 'Византия'", category: "mozaika", price: 9800, unit: "упак.", desc: "Смальтовая мозаика, золото и синий.", images: ["img/viz1.png", "img/viz2.png", "img/viz3.png"] },
+      { id: "m9", name: "Мозаика 'Раедом'", category: "mozaika", price: 6700, unit: "упак.", desc: "Единственная в своем роде, 5x5см.", images: ["img/roz1.png", "img/roz2.png", "img/roz3.png"] },
+      
+      // ДЕКОР (9 шт)
+      { id: "6", name: "Панно 'Итальянские сады'", category: "dekor", price: 12500, unit: "шт", desc: "Настенное панно из керамики ручной работы, размер 60x60 см.", images: ["img/panno1.png", "img/panno2.png", "img/panno3.png"] },
+      { id: "8", name: "Клинкерная ступень 'Терра'", category: "dekor", price: 3450, unit: "шт", desc: "Для лестниц, противоскользящая поверхность, 33x120 см.", images: ["img/clin1.png", "img/clin2.png", "img/clin3.png"] },
+      { id: "9", name: "3D-панель 'Волна'", category: "dekor", price: 8750, unit: "м²", desc: "Керамическая объемная панель для акцентных стен в ванной.", images: ["img/v1.png", "img/v2.png", "img/v3.png"] },
+      { id: "15", name: "Декор 'Золотая лента'", category: "dekor", price: 3450, unit: "шт", desc: "Фриз для ванной, 7x30 см, с золотым напылением.", images: ["img/friz1.png", "img/friz2.png", "img/friz3.png"] },
+      { id: "d5", name: "Напольный плинтус керамический", category: "dekor", price: 1250, unit: "шт", desc: "Для пола из керамогранита, длина 60 см.", images: ["img/plint1.png", "img/plint2.png", "img/plint3.png"] },
+      { id: "d6", name: "Декор-вставка 'Арабеска'", category: "dekor", price: 890, unit: "шт", desc: "10x10 см, узор восточный.", images: ["img/arab1.png", "img/arab2.png", "img/arab3.png"] },
+      { id: "d7", name: "Керамический бордюр 'Лазурь'", category: "dekor", price: 750, unit: "шт", desc: "Для обрамления зеркал и панно.", images: ["img/laz1.png", "img/laz2.png", "img/laz3.png"] },
+      { id: "d8", name: "Панно 'Лилия'", category: "dekor", price: 18900, unit: "шт", desc: "Большое панно 90x90 см, ручная роспись.", images: ["img/sak1.png", "img/sak2.png", "img/sak3.png"] },
+      { id: "d9", name: "Уголок керамический 'Золото'", category: "dekor", price: 450, unit: "шт", desc: "Для наружных углов, 30 см.", images: ["img/gol1.png", "img/gol2.png", "img/gol3.png"] }
+    ];
+
+    let cart = JSON.parse(localStorage.getItem('kerama_cart')) || [];
+    let currentCategory = "all";
+
+    function getCategoryName(cat) {
+      const names = { keramogranit: "Керамогранит", plitka: "Плитка", mozaika: "Мозаика", dekor: "Декор" };
+      return names[cat] || cat;
+    }
+
+    function showNotif(message) {
+      const notif = document.createElement('div');
+      notif.innerText = message;
+      notif.style.position = 'fixed';
+      notif.style.bottom = '20px';
+      notif.style.right = '20px';
+      notif.style.backgroundColor = '#1a1a1a';
+      notif.style.color = 'white';
+      notif.style.padding = '12px 24px';
+      notif.style.borderRadius = '60px';
+      notif.style.zIndex = '10000';
+      notif.style.fontWeight = '500';
+      notif.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+      document.body.appendChild(notif);
+      setTimeout(() => notif.remove(), 2500);
+    }
+
+    function updateCartUI() {
+      const totalQuantity = cart.reduce((sum, i) => sum + i.quantity, 0);
+      document.getElementById('cartCount').innerText = totalQuantity;
+      localStorage.setItem('kerama_cart', JSON.stringify(cart));
+    }
+
+    function renderCartModal() {
+      const cartItemsDiv = document.getElementById('cartItems');
+      const cartTotalSpan = document.getElementById('cartTotal');
+      if (!cart.length) {
+        cartItemsDiv.innerHTML = '<div class="empty-cart">✨ Ваша корзина пуста, выберите плитку мечты ✨</div>';
+        cartTotalSpan.innerText = '0';
+        return;
+      }
+      let total = 0;
+      let html = '';
+      cart.forEach((item, idx) => {
+        total += item.price * item.quantity;
+        html += `
+          <div class="cart-item">
+            <img src="${item.image}" alt="${item.name}">
+            <div class="cart-item-info">
+              <h4>${item.name}</h4>
+              <div>${item.price.toLocaleString()} ₽ / ${item.unit || 'шт'}</div>
+            </div>
+            <div class="cart-item-controls">
+              <button onclick="changeQty(${idx}, -1)">−</button>
+              <span>${item.quantity}</span>
+              <button onclick="changeQty(${idx}, 1)">+</button>
+              <button onclick="removeItem(${idx})" style="background-color:#b8705a;">✕</button>
+            </div>
+          </div>
+        `;
+      });
+      cartItemsDiv.innerHTML = html;
+      cartTotalSpan.innerText = total.toLocaleString();
+    }
+
+    window.changeQty = function(index, delta) {
+      const newQty = cart[index].quantity + delta;
+      if (newQty <= 0) cart.splice(index, 1);
+      else cart[index].quantity = newQty;
+      updateCartUI();
+      renderCartModal();
+    };
+    window.removeItem = function(index) {
+      cart.splice(index, 1);
+      updateCartUI();
+      renderCartModal();
+    };
+
+    function renderProducts() {
+      const container = document.getElementById('productsContainer');
+      const filtered = currentCategory === "all" ? productsData : productsData.filter(p => p.category === currentCategory);
+      
+      container.innerHTML = filtered.map(product => `
+        <div class="product" data-id="${product.id}" data-name="${product.name}" data-price="${product.price}" data-unit="${product.unit}">
+          <div class="product-carousel">
+            <div class="product-carousel-track">
+              ${product.images.map(img => `<div class="product-carousel-slide"><img src="${img}" alt="${product.name}" onerror="this.src='https://placehold.co/400x300?text=Kerama'"></div>`).join('')}
+            </div>
+            <div class="product-carousel-buttons">
+              <button class="carousel-prev">‹</button>
+              <button class="carousel-next">›</button>
+            </div>
+          </div>
+          <div class="product-category">${getCategoryName(product.category)}</div>
+          <h3>${product.name}</h3>
+          <p>${product.desc}</p>
+          <div class="price">${product.price.toLocaleString()} ₽ / ${product.unit}</div>
+          <button class="add-to-cart">В корзину</button>
+        </div>
+      `).join('');
+
+      document.querySelectorAll('.product').forEach(product => {
+        const carousel = product.querySelector('.product-carousel-track');
+        if (!carousel) return;
+        const slides = carousel.children;
+        const total = slides.length;
+        let current = 0;
+        const prevBtn = product.querySelector('.carousel-prev');
+        const nextBtn = product.querySelector('.carousel-next');
+        const updateCarousel = () => carousel.style.transform = `translateX(-${current * 100}%)`;
+        if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); current = (current - 1 + total) % total; updateCarousel(); });
+        if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); current = (current + 1) % total; updateCarousel(); });
+      });
+
+      document.querySelectorAll('.add-to-cart').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const productDiv = btn.closest('.product');
+          const id = productDiv.getAttribute('data-id');
+          const productData = productsData.find(p => p.id === id);
+          if (productData) {
+            const existing = cart.find(item => item.id === id);
+            if (existing) existing.quantity += 1;
+            else cart.push({ id: productData.id, name: productData.name, price: productData.price, image: productData.images[0], quantity: 1, unit: productData.unit });
+            updateCartUI();
+            showNotif(`✓ ${productData.name} добавлен в корзину`);
+          }
+        });
+      });
+    }
+
+    document.querySelectorAll('.category-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = btn.getAttribute('data-category');
+        renderProducts();
+      });
+    });
+
+    const cartModal = document.getElementById('cartModal');
+    const closeModal = document.querySelector('.close');
+    document.getElementById('cartIcon').addEventListener('click', () => { renderCartModal(); cartModal.style.display = 'block'; });
+    closeModal.addEventListener('click', () => cartModal.style.display = 'none');
+    window.addEventListener('click', (e) => { if (e.target === cartModal) cartModal.style.display = 'none'; });
+    document.querySelector('.checkout-btn').addEventListener('click', async () => {
+
+    if(cart.length === 0){
+        alert('Корзина пуста');
+        return;
+    }
+
+    try{
+
+  const response = await fetch('save_order.php', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        cart: cart
+    })
+});
+
+const result = await response.json();
+
+        if(result.success){
+
+            alert('✅ Заказ успешно оформлен');
+
+            cart = [];
+
+            updateCartUI();
+
+            renderCartModal();
+
+            localStorage.removeItem('kerama_cart');
+
+            cartModal.style.display = 'none';
+
+        }else{
+            alert('Ошибка сохранения заказа');
+        }
+
+    }catch(error){
+        alert('Ошибка соединения с сервером');
+        console.log(error);
+    }
+
+});
+    renderProducts();
+    updateCartUI();
+  </script>
+</body>
+</html>
